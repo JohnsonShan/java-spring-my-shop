@@ -17,27 +17,35 @@ package com.example.myshop;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-/**
- * @author Johnson
- */
 // tag::code[]
 @Component // <1>
 public class DatabaseLoader implements CommandLineRunner { // <2>
 
 	private final ProductRepository repository;
+	private final ManagerRepository managers;
 
 	@Autowired // <3>
-	public DatabaseLoader(final ProductRepository repository) {
+	public DatabaseLoader(final ProductRepository repository, ManagerRepository managerRepository) {
 		this.repository = repository;
+		this.managers = managerRepository;
 	}
 
 	@Override
 	public void run(final String... strings) throws Exception { // <4>
-		for(int i=0;i<20;i++){
-			this.repository.save(new Product("myProduct" + i, "testing" + i));
+		Manager johnson = this.managers.save(new Manager("johnson", "johnsonabcd", "ROLE_MANAGER"));
+
+		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("johnson",
+				"doesn't matter", AuthorityUtils.createAuthorityList("ROLE_MANAGER")));
+
+		for (int i = 0; i < 20; i++) {
+			this.repository.save(new Product("myProduct" + i, "testing" + i, johnson));
 		}
+		SecurityContextHolder.clearContext();
 	}
 }
 // end::code[]
