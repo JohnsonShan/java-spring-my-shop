@@ -1,0 +1,181 @@
+.test {
+    border: 2px solid black;
+}
+
+.test-height-width-100px {
+    height: 100px;
+    width: 100px;
+}
+
+* {
+    /* font-family: Arial, Helvetica, sans-serif; */
+    font-family: 'Noto Serif TC', serif;
+    /* font-weight: 900; */
+    /* font-size: 16px; */
+    transition: all .5s;
+}
+
+html {
+    overflow-x:hidden;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow-x:hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    padding: 10px;
+}
+
+p {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 10px;
+    margin-right: 10px;
+    /* margin-top: 10px; */
+}
+
+i {
+    font-size: 2rem;
+    padding: 1rem;
+    /* background-color: #1c2845;
+    color: #f5f6f7; */
+}
+img {
+    justify-self: center;
+    align-self: center;
+}
+.night {
+    background-color: #1c2845;
+    color: #f5f6f7;
+}
+
+.day {
+    background-color: #f5f6f7;
+    color: #1c2845;
+}
+
+.bg-day {
+    background-color: #f5f6f7;
+}
+
+.bg-night {
+    background-color: #1c2845;
+}
+
+.text-night {
+    color: #1c2845;
+}
+
+.text-day {
+    color: #f5f6f7;
+}
+
+.min-height-80 {
+    min-height: 80vh;
+}
+
+.min-height-10 {
+    min-height: 10vh;
+}
+
+.min-height-20 {
+    min-height: 20vh;
+}
+
+.max-height-20 {
+    max-height: 20vh;
+}
+
+.rwd-width {
+    width: 80vw;
+}
+
+.max-width-100 {
+    max-width: 100%;
+}
+
+.add-line {
+    border-top: 5px solid black;
+    margin-bottom: 10vh;
+}
+
+.add-thin-line {
+    width: 100%;
+    border-top: 2px solid rgb(179, 174, 174);
+    margin-bottom: 5vh;
+}
+
+/* .fade-in {
+    max-width: 100%;
+    max-height: 100%;
+    opacity: 0;
+}
+
+.from-top {
+    transform: translateY(-200%);
+}
+
+.from-bottom {
+    transform: translateY(200%);
+}
+
+.from-left {
+    transform: translateX(-10%);
+}
+
+.from-right {
+    transform: translateX(10%);
+} */
+
+#nav {
+    position: absolute;
+    top: 0px;
+}
+
+
+
+.opacity-7 {
+    opacity: 0.7;
+}
+
+@media only screen and (min-width: 992px) {
+    * {
+        transition: all .5s;
+    }
+    .bg-day:hover {
+        background-color: #1c2845;
+    }
+    .bg-night:hover {
+        background-color: #f5f6f7;
+    }
+    .text-night:hover {
+        color: #f5f6f7;
+    }
+    .text-day:hover {
+        color: #1c2845;
+    }
+    .rwd-width {
+        width: 85vw;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+
+    * {
+        /* font-size: 12px; */
+        /* padding: 5px; */
+    }    
+    .rwd-width {
+        width: 90vw;
+    }
+}

@@ -43,7 +43,7 @@ public class DatabaseLoader implements CommandLineRunner { // <2>
 				"doesn't matter", AuthorityUtils.createAuthorityList("ROLE_MANAGER")));
 
 		for (int i = 0; i < 20; i++) {
-			this.repository.save(new Product("myProduct" + i, "testing" + i, johnson));
+			this.repository.save(new Product("myProduct" + i, "testing" + i, johnson, (double)i+0.9, (double)i+99));
 		}
 		SecurityContextHolder.clearContext();
 	}

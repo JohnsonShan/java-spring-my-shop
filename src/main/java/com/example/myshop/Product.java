@@ -33,17 +33,20 @@ public class Product {
 	private @Id @GeneratedValue Long id;
 	private String name;
 	private String description;
-
+	private Double price;
+	private Double oldPrice;
 	private @Version @JsonIgnore Long version;
 
 	private @ManyToOne Manager manager; // <1>
 
 	private Product() {}
 
-	public Product(String name, String description, Manager manager) { // <2>
+	public Product(String name, String description, Manager manager, Double price, Double oldPrice) { // <2>
 		this.name = name;
 		this.description = description;
 		this.manager = manager;
+		this.price = price;
+		this.oldPrice = oldPrice;
 	}
 
 	@Override
@@ -51,17 +54,18 @@ public class Product {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Product product = (Product) o;
-		return Objects.equals(id, product.id) &&
-			Objects.equals(name, product.name) &&
-			Objects.equals(description, product.description) &&
-			Objects.equals(version, product.version) &&
-			Objects.equals(manager, product.manager);
+		return Objects.equals(id, product.id);
+		// &&
+		// 	Objects.equals(name, product.name) &&
+		// 	Objects.equals(description, product.description) &&
+		// 	Objects.equals(version, product.version) &&
+		// 	Objects.equals(manager, product.manager);
 	}
 
 	@Override
 	public int hashCode() {
 
-		return Objects.hash(id, name, description, version, manager);
+		return Objects.hash(id, name, description, version, manager, price, oldPrice);
 	}
 
 	public Long getId() {
@@ -80,7 +84,18 @@ public class Product {
 		this.name = name;
 	}
 
-
+	public Double getPrice(){
+		return price;
+	}
+	public void setPrice(Double price){
+		this.price = price;
+	}
+	public Double getOldPrice(){
+		return oldPrice;
+	}
+	public void setOldPrice(Double oldPrice){
+		this.oldPrice = oldPrice;
+	}
 
 	public String getDescription() {
 		return description;
@@ -112,6 +127,8 @@ public class Product {
 			"id=" + id +
 			", name='" + name + '\'' +
 			", description='" + description + '\'' +
+			", price='" + price +'\'' +
+			", oldPrice='" + oldPrice + '\'' +
 			", version=" + version +
 			", manager=" + manager +
 			'}';

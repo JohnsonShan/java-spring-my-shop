@@ -2,15 +2,6 @@ input.field {
     width: 90%;
 }
 
-table {
-    border-collapse: collapse;
-}
-
-td, th {
-    border: 1px solid #999;
-    padding: 0.5rem;
-    text-align: left;
-}
 
 /*Classes for creating dialogs*/
 
@@ -67,3 +58,4 @@ td, th {
 }
 
 .close:hover { background: #00d9ff; }
+

@@ -1,23 +1,34 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
+
 <head lang="en">
-    <meta charset="UTF-8"/>
-    <title>ReactJS + Spring Data REST</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My shop</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200;300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel="stylesheet" href="/main.css" />
+    <link rel='stylesheet' href='/style.css' />
 </head>
 <body>
     <!-- tag::logout[] -->
-    <div>
+    <div class='d-none'>
         Hello, <span id="managername" th:text="${#authentication.name}">user</span>.
         <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Log Out"/>
+            <input type="submit" value="Log Out" />
         </form>
     </div>
     <!-- end::logout[] -->
 
-    <div id="react"></div>
+    <div id="react" class='container-fluid d-flex flex-column justify-content-start align-items-center'></div>
 
     <script src="built/bundle.js"></script>
 
 </body>
+
 </html>
