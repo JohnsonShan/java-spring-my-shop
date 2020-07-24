@@ -45,7 +45,7 @@ p {
 }
 
 i {
-    font-size: 2rem;
+    font-size: 4rem;
     padding: 1rem;
     /* background-color: #1c2845;
     color: #f5f6f7; */
@@ -171,9 +171,8 @@ img {
 
 @media only screen and (max-width: 768px) {
 
-    * {
-        /* font-size: 12px; */
-        /* padding: 5px; */
+    i {
+        font-size: 2rem;
     }    
     .rwd-width {
         width: 90vw;

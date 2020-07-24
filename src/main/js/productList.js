@@ -10,6 +10,7 @@ export default class ProductList extends React.Component {
     this.handleNavNext = this.handleNavNext.bind(this);
     this.handleNavLast = this.handleNavLast.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    
   }
 
   handleInput(e) {
@@ -62,6 +63,8 @@ export default class ProductList extends React.Component {
           onUpdate={this.props.onUpdate}
           onDelete={this.props.onDelete}
           loggedInManager={this.props.loggedInManager}
+          cart={this.props.cart}
+          updateCartFromCookie={this.props.updateCartFromCookie}
         />
       );
     });
@@ -69,28 +72,28 @@ export default class ProductList extends React.Component {
     const navLinks = [];
     if ("first" in this.props.links) {
       navLinks.push(
-        <button key="first" onClick={this.handleNavFirst}>
+        <button className='m-2 btn btn-outline-primary' key="first" onClick={this.handleNavFirst}>
           &lt;&lt;
         </button>
       );
     }
     if ("prev" in this.props.links) {
       navLinks.push(
-        <button key="prev" onClick={this.handleNavPrev}>
+        <button className='m-2 btn btn-outline-primary' key="prev" onClick={this.handleNavPrev}>
           &lt;
         </button>
       );
     }
     if ("next" in this.props.links) {
       navLinks.push(
-        <button key="next" onClick={this.handleNavNext}>
+        <button className='m-2 btn btn-outline-primary' key="next" onClick={this.handleNavNext}>
           &gt;
         </button>
       );
     }
     if ("last" in this.props.links) {
       navLinks.push(
-        <button key="last" onClick={this.handleNavLast}>
+        <button className='m-2 btn btn-outline-primary' key="last" onClick={this.handleNavLast}>
           &gt;&gt;
         </button>
       );

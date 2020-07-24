@@ -35,18 +35,22 @@ public class Product {
 	private String description;
 	private Double price;
 	private Double oldPrice;
+
+	private String img;
+
 	private @Version @JsonIgnore Long version;
 
 	private @ManyToOne Manager manager; // <1>
 
 	private Product() {}
 
-	public Product(String name, String description, Manager manager, Double price, Double oldPrice) { // <2>
+	public Product(String name, String description, Manager manager, Double price, Double oldPrice, String img) { // <2>
 		this.name = name;
 		this.description = description;
 		this.manager = manager;
 		this.price = price;
 		this.oldPrice = oldPrice;
+		this.img = img;
 	}
 
 	@Override
@@ -105,6 +109,15 @@ public class Product {
 		this.description = description;
 	}
 
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
+
+
 	public Long getVersion() {
 		return version;
 	}
@@ -129,6 +142,7 @@ public class Product {
 			", description='" + description + '\'' +
 			", price='" + price +'\'' +
 			", oldPrice='" + oldPrice + '\'' +
+			", img='" + img + '\'' +
 			", version=" + version +
 			", manager=" + manager +
 			'}';

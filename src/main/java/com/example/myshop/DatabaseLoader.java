@@ -42,8 +42,21 @@ public class DatabaseLoader implements CommandLineRunner { // <2>
 		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("johnson",
 				"doesn't matter", AuthorityUtils.createAuthorityList("ROLE_MANAGER")));
 
-		for (int i = 0; i < 20; i++) {
-			this.repository.save(new Product("myProduct" + i, "testing" + i, johnson, (double)i+0.9, (double)i+99));
+		for (int i = 1; i < 6; i++) {
+			this.repository.save(new Product("pizza" + i, "pizza" + i, johnson, (double) 100 + i + 0.9,
+					(double) 200 + i + 0.9, "pizza" + i + ".jpg"));
+		}
+		for (int i = 1; i < 6; i++) {
+			this.repository.save(new Product("pasta" + i, "pasta" + i, johnson, (double) 100 + i + 0.9,
+					(double) 200 + i + 0.9, "pasta" + i + ".jpg"));
+		}
+		for (int i = 1; i < 6; i++) {
+			this.repository.save(new Product("risotto" + i, "risotto" + i, johnson, (double) 100 + i + 0.9,
+					(double) 200 + i + 0.9, "risotto" + i + ".jpg"));
+		}
+		for (int i = 1; i < 6; i++) {
+			this.repository.save(new Product("burger" + i, "burger" + i, johnson, (double) 100 + i + 0.9,
+					(double) 200 + i + 0.9, "burger" + i + ".jpg"));
 		}
 		SecurityContextHolder.clearContext();
 	}

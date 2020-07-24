@@ -5,8 +5,9 @@ import UpdateDialog from "./updateDialog";
 import Product from "./product";
 import ProductList from "./productList";
 import Nav from "./nav";
+import CartDialog from "./cartDialog";
 // import Test from './../resources/static/images/test.png';
-
+import { useState, useEffect } from "react";
 const React = require("react");
 const ReactDOM = require("react-dom");
 const when = require("when");
@@ -28,6 +29,7 @@ class App extends React.Component {
       pageSize: 12,
       links: {},
       loggedInManager: this.props.loggedInManager,
+      cart: [],
     };
     this.updatePageSize = this.updatePageSize.bind(this);
     this.onCreate = this.onCreate.bind(this);
@@ -36,6 +38,33 @@ class App extends React.Component {
     this.onNavigate = this.onNavigate.bind(this);
     this.refreshCurrentPage = this.refreshCurrentPage.bind(this);
     this.refreshAndGoToLastPage = this.refreshAndGoToLastPage.bind(this);
+    this.updateCartFromCookie = this.updateCartFromCookie.bind(this);
+  }
+
+  updateCartFromCookie() {
+    function getCookie(cname) {
+      let name = cname + "=";
+      let ca = document.cookie.split(";");
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == " ") {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    }
+
+    let cart = getCookie("cart").split(", ");
+    if (cart[0] == "") {
+      cart.splice(0, 1);
+    }
+
+    this.setState({
+      cart: cart,
+    });
   }
 
   loadFromServer(pageSize) {
@@ -197,7 +226,6 @@ class App extends React.Component {
       this.loadFromServer(pageSize);
     }
   }
-
   // tag::websocket-handlers[]
   refreshAndGoToLastPage(message) {
     follow(client, root, [
@@ -258,19 +286,29 @@ class App extends React.Component {
       { route: "/topic/updateProduct", callback: this.refreshCurrentPage },
       { route: "/topic/deleteProduct", callback: this.refreshCurrentPage },
     ]);
+
+    this.updateCartFromCookie();
   }
   // end::register-handlers[]
 
   render() {
     return (
-      <div className="container-fluid d-flex flex-column justify-content-center align-items-center">
+      <div className="container d-flex flex-column justify-content-center align-items-center">
         {/* <div className="container-fluid d-flex flex-column justify-content-center align-items-center d-none">
           notice
         </div> */}
 
-        <Nav />
+        <Nav
+          products={this.state.products}
+          cart={this.state.cart}
+          updateCartFromCookie={this.updateCartFromCookie}
+        />
 
-        <img className="image-fluid mb-5" src="/images/test.png" />
+        <div id='logo' className="card mb-5">
+          <a className="stretched-link" href="/">
+            <i className="fas fa-robot rounded text-dark "> Johnson'shop</i>
+          </a>
+        </div>
 
         {/* <div className="container-fluid d-flex flex-column justify-content-center align-items-center">
           slide or highlight
@@ -296,6 +334,8 @@ class App extends React.Component {
           onDelete={this.onDelete}
           updatePageSize={this.updatePageSize}
           loggedInManager={this.state.loggedInManager}
+          cart={this.state.cart}
+          updateCartFromCookie={this.updateCartFromCookie}
         />
       </div>
     );
