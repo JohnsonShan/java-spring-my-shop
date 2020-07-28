@@ -60,49 +60,53 @@ export default class CartDialog extends React.Component {
 
         <div id="cart" className="modalDialog" onClick={this.handleClick}>
           <div>
-            {/* <a href="#" title="Close" className="close">
-              X
-            </a> */}
-
             <h2>Cart </h2>
 
-            <div className="row mb-3 d-none d-lg-block">
-              <div className="col">Product</div>
-              <div className="col">Product Deatil</div>
-              <div className="col">Unit price ($)</div>
-              <div className="col">quantity</div>
-              <div className="col">Subtotal ($)</div>
+            <div className="row mb-3 ">
+              <div className="col-3">Product</div>
+              <div className="col-3">Deatil</div>
+              <div className="col-6">
+                <div className="float-right">Subtotal (HK$)</div>
+              </div>
             </div>
-            
+
             {this.state.cartObj.map((item, i) => {
               total += parseFloat(item.price) * parseFloat(item.quantity);
               return (
                 <div key={i} className="row">
-                  <div className="col ">
+                  <div className="col-3">
                     <img
                       className="image-fluid img-thumbnail "
                       src={`/images/${item.img}`}
                     />
                   </div>
-                  <div className="col">{item.name}</div>
-                  <div className="col">{item.price}</div>
-                  <div className="col">{item.quantity}</div>
-                  <div className="col">
-                    {Math.round(
-                      parseFloat(item.price) * parseFloat(item.quantity) * 100
-                    ) / 100}
+                  <div className="col-3">{item.name}</div>
+
+                  <div className="col-6 float-right">
+                    <div className="float-right mb-2">
+                      {item.quantity} * ${item.price}
+                    </div>
+                    <br />
+                    <div className="float-right mb-2">
+
+                    </div>
                   </div>
                 </div>
               );
             })}
             <div className="row">
-              <div className="col"></div>
-              <div className="col">Sum: </div>
-              <div className="col"></div>
-              <div className="col"></div>
-              <div className="col">{Math.round(total * 100) / 100}</div>
+              <div className="col-3"></div>
+              <div className="col-3">Sum: </div>
+
+              <div className="col-6 ">
+                <div className="float-right">
+                  ${Math.round(total * 100) / 100}
+                </div>
+              </div>
             </div>
-            <button className="w-100 my-2">CheckOut (not implemented)</button>
+            <button className="w-100 my-2 btn btn-outline-primary">
+              CheckOut (not implemented)
+            </button>
           </div>
         </div>
       </div>

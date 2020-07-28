@@ -29,6 +29,7 @@ class App extends React.Component {
       pageSize: 12,
       links: {},
       loggedInManager: this.props.loggedInManager,
+      auth: this.props.auth,
       cart: [],
     };
     this.updatePageSize = this.updatePageSize.bind(this);
@@ -137,7 +138,6 @@ class App extends React.Component {
 
   // tag::on-update[]
   onUpdate(product, updatedProduct) {
-    if (product.entity.manager.name === this.state.loggedInManager) {
       updatedProduct["manager"] = product.entity.manager;
       client({
         method: "PUT",
@@ -167,9 +167,7 @@ class App extends React.Component {
           }
         }
       );
-    } else {
-      alert("You are not authorized to update");
-    }
+    
   }
   // end::on-update[]
 
@@ -280,12 +278,29 @@ class App extends React.Component {
 
   // tag::register-handlers[]
   componentDidMount() {
+    // console.log("auth", this.props.auth);
+    // console.log("auth", this.props.auth != null);
     this.loadFromServer(this.state.pageSize);
-    stompClient.register([
-      { route: "/topic/newProduct", callback: this.refreshAndGoToLastPage },
-      { route: "/topic/updateProduct", callback: this.refreshCurrentPage },
-      { route: "/topic/deleteProduct", callback: this.refreshCurrentPage },
-    ]);
+
+    if (this.state.auth != null) {
+      // console.log("authed");
+      stompClient.register([
+        {
+          route: "/topic/newProduct",
+          callback: this.refreshAndGoToLastPage,
+        },
+        {
+          route: "/topic/updateProduct",
+          callback: this.refreshCurrentPage,
+        },
+        {
+          route: "/topic/deleteProduct",
+          callback: this.refreshCurrentPage,
+        },
+      ]);
+    } else {
+      // console.log("not authed");
+    }
 
     this.updateCartFromCookie();
   }
@@ -299,12 +314,16 @@ class App extends React.Component {
         </div> */}
 
         <Nav
+          login={this.state.loggedInManager}
+          auth={this.state.auth}
           products={this.state.products}
           cart={this.state.cart}
           updateCartFromCookie={this.updateCartFromCookie}
+          attributes={this.state.attributes}
+          onCreate={this.onCreate}
         />
 
-        <div id='logo' className="card mb-5">
+        <div id="logo" className="card mb-5">
           <a className="stretched-link" href="/">
             <i className="fas fa-robot rounded text-dark "> Johnson'shop</i>
           </a>
@@ -318,10 +337,6 @@ class App extends React.Component {
         <div>highlight/default product list</div>
         <div>footer</div> */}
 
-        {/* <CreateDialog
-          attributes={this.state.attributes}
-          onCreate={this.onCreate}
-        /> */}
 
         <ProductList
           page={this.state.page}
@@ -333,6 +348,7 @@ class App extends React.Component {
           onUpdate={this.onUpdate}
           onDelete={this.onDelete}
           updatePageSize={this.updatePageSize}
+          auth={this.state.auth}
           loggedInManager={this.state.loggedInManager}
           cart={this.state.cart}
           updateCartFromCookie={this.updateCartFromCookie}
@@ -343,6 +359,9 @@ class App extends React.Component {
 }
 
 ReactDOM.render(
-  <App loggedInManager={document.getElementById("managername").innerHTML} />,
+  <App
+    loggedInManager={document.getElementById("name").innerHTML}
+    auth={document.getElementById("auth")}
+  />,
   document.getElementById("react")
 );

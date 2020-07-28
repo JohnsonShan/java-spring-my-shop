@@ -5,6 +5,7 @@ export default class UpdateDialog extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleSubmit(e) {
@@ -19,52 +20,59 @@ export default class UpdateDialog extends React.Component {
     window.location = "#";
   }
 
+  handleClick(e) {
+    if (
+      e.target.id ==
+      "updateProduct-" + this.props.product.entity._links.self.href
+    ) {
+      location.href = "#";
+    }
+  }
+
   render() {
-    const inputs = this.props.attributes.map((attribute) => (
-      <p key={this.props.product.entity[attribute]}>
+    const inputs = this.props.attributes.map((attribute, i) => (
+      <p
+        key={
+          "updateProduct-" +
+          this.props.product.entity._links.self.href +
+          "attribute" +
+          i
+        }
+      >
         <input
           type="text"
           placeholder={attribute}
           defaultValue={this.props.product.entity[attribute]}
           ref={attribute}
-          className="field"
+          className="field w-100 my-2"
         />
       </p>
     ));
-
     const dialogId =
       "updateProduct-" + this.props.product.entity._links.self.href;
 
-    const isManagerCorrect =
-      this.props.product.entity.manager.name == this.props.loggedInManager;
+    return (
+      <div className="w-100">
+        <a href={"#" + dialogId} className="w-100 btn btn-primary my-1">
+          Update
+        </a>
 
-    if (isManagerCorrect === false) {
-      return (
-        <div>
-          <a>Not Your Product</a>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <a href={"#" + dialogId}>Update</a>
+        <div id={dialogId} className="modalDialog " onClick={this.handleClick}>
+          <div>
+            <h2>Update an product</h2>
 
-          <div id={dialogId} className="modalDialog">
-            <div>
-              <a href="#" title="Close" className="close">
-                X
-              </a>
-
-              <h2>Update an product</h2>
-
-              <form>
-                {inputs}
-                <button onClick={this.handleSubmit}>Update</button>
-              </form>
-            </div>
+            <form>
+              {inputs}
+              <button
+                onClick={this.handleSubmit}
+                className="w-100 my-2 btn btn-outline-primary"
+              >
+                Update
+              </button>
+            </form>
           </div>
         </div>
-      );
-    }
+      </div>
+    );
   }
 }

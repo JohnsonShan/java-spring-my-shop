@@ -12,6 +12,7 @@ export default class Product extends React.Component {
   handleDelete() {
     this.props.onDelete(this.props.product);
   }
+
   handleAddToCart(e) {
     function setCookie(cname, cvalue, exdays) {
       let d = new Date();
@@ -77,24 +78,34 @@ export default class Product extends React.Component {
         <div className="d-flex flex-column justify-content-center align-items-center w-100 mb-5">
           <button
             onClick={this.handleAddToCart}
-            className="w-100 btn btn-outline-primary"
+            className="w-100 btn btn-outline-primary my-1"
           >
             Add to Cart
           </button>
-        </div>
 
-        {/* <td>{this.props.product.entity.manager.name}</td> */}
-        {/* <td>
+          {this.props.auth ? (
             <UpdateDialog
               product={this.props.product}
               attributes={this.props.attributes}
               onUpdate={this.props.onUpdate}
               loggedInManager={this.props.loggedInManager}
             />
-          </td>
-          <td>
-            <button onClick={this.handleDelete}>Delete</button>
-          </td> */}
+          ) : (
+            <div></div>
+          )}
+
+          {this.props.auth ? (
+            <button
+              onClick={this.handleDelete}
+              className="w-100 btn btn-danger my-1"
+            >
+              Delete
+            </button>
+          ) : (
+            <div></div>
+          )}
+        </div>
+
       </div>
     );
   }

@@ -62,6 +62,7 @@ export default class ProductList extends React.Component {
           attributes={this.props.attributes}
           onUpdate={this.props.onUpdate}
           onDelete={this.props.onDelete}
+          auth={this.props.auth}
           loggedInManager={this.props.loggedInManager}
           cart={this.props.cart}
           updateCartFromCookie={this.props.updateCartFromCookie}

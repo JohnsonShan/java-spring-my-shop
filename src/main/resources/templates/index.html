@@ -15,17 +15,19 @@
     <link rel="stylesheet" href="/main.css" />
     <link rel='stylesheet' href='/style.css' />
 </head>
-<body>
-    <!-- tag::logout[] -->
-    <div class='d-none'>
-        Hello, <span id="managername" th:text="${#authentication.name}">user</span>.
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Log Out" />
-        </form>
-    </div>
-    <!-- end::logout[] -->
 
-    <div id="react" class='container-fluid d-flex flex-column justify-content-start align-items-center'></div>
+<body>
+
+    <!-- tag::auth[] -->
+    <div class='d-none'>
+        Hello, <span id="name" th:text="${#authentication.name}">user</span>.
+    </div>
+    <div class='d-none' id='auth' sec:authorize="hasRole('ROLE_MANAGER')">
+        This will only be displayed if authenticated user has role ROLE_MANAGER.
+    </div>
+    <!-- end::auth[] -->
+
+    <div id="react" ></div>
 
     <script src="built/bundle.js"></script>
 
