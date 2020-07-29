@@ -37,15 +37,11 @@ public class DatabaseLoader implements CommandLineRunner { // <2>
 
 	@Override
 	public void run(final String... strings) throws Exception { // <4>
-		Manager johnson = this.managers.save(new Manager("johnson", "johnsonabcd", "ROLE_MANAGER"));
+		Manager johnson = this.managers.save(new Manager("johnson", "johnsonabcd", "Admin"));
 
 		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("johnson",
-				"doesn't matter", AuthorityUtils.createAuthorityList("ROLE_MANAGER")));
+				"doesn't matter", AuthorityUtils.createAuthorityList("Admin")));
 
-		for (int i = 1; i < 6; i++) {
-			this.repository.save(new Product("pizza" + i, "pizza" + i, johnson, (double) 100 + i + 0.9,
-					(double) 200 + i + 0.9, "pizza" + i + ".jpg"));
-		}
 		for (int i = 1; i < 6; i++) {
 			this.repository.save(new Product("pasta" + i, "pasta" + i, johnson, (double) 100 + i + 0.9,
 					(double) 200 + i + 0.9, "pasta" + i + ".jpg"));
@@ -53,6 +49,10 @@ public class DatabaseLoader implements CommandLineRunner { // <2>
 		for (int i = 1; i < 6; i++) {
 			this.repository.save(new Product("risotto" + i, "risotto" + i, johnson, (double) 100 + i + 0.9,
 					(double) 200 + i + 0.9, "risotto" + i + ".jpg"));
+		}
+		for (int i = 1; i < 6; i++) {
+			this.repository.save(new Product("pizza" + i, "pizza" + i, johnson, (double) 100 + i + 0.9,
+					(double) 200 + i + 0.9, "pizza" + i + ".jpg"));
 		}
 		for (int i = 1; i < 6; i++) {
 			this.repository.save(new Product("burger" + i, "burger" + i, johnson, (double) 100 + i + 0.9,

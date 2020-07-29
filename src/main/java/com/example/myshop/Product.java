@@ -59,18 +59,8 @@ public class Product {
 		if (o == null || getClass() != o.getClass()) return false;
 		Product product = (Product) o;
 		return Objects.equals(id, product.id);
-		// &&
-		// 	Objects.equals(name, product.name) &&
-		// 	Objects.equals(description, product.description) &&
-		// 	Objects.equals(version, product.version) &&
-		// 	Objects.equals(manager, product.manager);
 	}
 
-	@Override
-	public int hashCode() {
-
-		return Objects.hash(id, name, description, version, manager, price, oldPrice);
-	}
 
 	public Long getId() {
 		return id;
