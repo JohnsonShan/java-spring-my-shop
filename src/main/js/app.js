@@ -8,14 +8,13 @@ import Nav from "./nav";
 import CartDialog from "./cartDialog";
 // import Test from './../resources/static/images/test.png';
 import { useState, useEffect } from "react";
-const React = require("react");
-const ReactDOM = require("react-dom");
-const when = require("when");
-const client = require("./client");
 
-const follow = require("./follow"); // function to hop multiple links by "rel"
-
-const stompClient = require("./websocket-listener");
+import React from "react";
+import ReactDOM from "react-dom";
+import when from "when";
+import client from "./api/client";
+import follow from "./api/follow";
+import stompClient from "./api/websocket-listener";
 
 const root = "/api";
 
@@ -40,6 +39,16 @@ class App extends React.Component {
     this.refreshCurrentPage = this.refreshCurrentPage.bind(this);
     this.refreshAndGoToLastPage = this.refreshAndGoToLastPage.bind(this);
     this.updateCartFromCookie = this.updateCartFromCookie.bind(this);
+    this.postPhoto = this.postPhoto.bind(this);
+  }
+
+  postPhoto(form) {
+    fetch('/uploadPhoto', {
+      method: 'POST',
+      body: form,
+    }).then(()=>{
+      console.log('upload done')
+    });
   }
 
   updateCartFromCookie() {
@@ -138,36 +147,35 @@ class App extends React.Component {
 
   // tag::on-update[]
   onUpdate(product, updatedProduct) {
-      updatedProduct["manager"] = product.entity.manager;
-      client({
-        method: "PUT",
-        path: product.entity._links.self.href,
-        entity: updatedProduct,
-        headers: {
-          "Content-Type": "application/json",
-          "If-Match": product.headers.Etag,
-        },
-      }).done(
-        (response) => {
-          /* Let the websocket handler update the state */
-        },
-        (response) => {
-          if (response.status.code === 403) {
-            alert(
-              "ACCESS DENIED: You are not authorized to update " +
-                product.entity._links.self.href
-            );
-          }
-          if (response.status.code === 412) {
-            alert(
-              "DENIED: Unable to update " +
-                product.entity._links.self.href +
-                ". Your copy is stale."
-            );
-          }
+    updatedProduct["manager"] = product.entity.manager;
+    client({
+      method: "PUT",
+      path: product.entity._links.self.href,
+      entity: updatedProduct,
+      headers: {
+        "Content-Type": "application/json",
+        "If-Match": product.headers.Etag,
+      },
+    }).done(
+      (response) => {
+        /* Let the websocket handler update the state */
+      },
+      (response) => {
+        if (response.status.code === 403) {
+          alert(
+            "ACCESS DENIED: You are not authorized to update " +
+              product.entity._links.self.href
+          );
         }
-      );
-    
+        if (response.status.code === 412) {
+          alert(
+            "DENIED: Unable to update " +
+              product.entity._links.self.href +
+              ". Your copy is stale."
+          );
+        }
+      }
+    );
   }
   // end::on-update[]
 
@@ -321,6 +329,7 @@ class App extends React.Component {
           updateCartFromCookie={this.updateCartFromCookie}
           attributes={this.state.attributes}
           onCreate={this.onCreate}
+          postPhoto={this.postPhoto}
         />
 
         <div id="logo" className="card mb-5">
@@ -337,7 +346,6 @@ class App extends React.Component {
         <div>highlight/default product list</div>
         <div>footer</div> */}
 
-
         <ProductList
           page={this.state.page}
           products={this.state.products}
@@ -352,6 +360,7 @@ class App extends React.Component {
           loggedInManager={this.state.loggedInManager}
           cart={this.state.cart}
           updateCartFromCookie={this.updateCartFromCookie}
+          postPhoto={this.postPhoto}
         />
       </div>
     );

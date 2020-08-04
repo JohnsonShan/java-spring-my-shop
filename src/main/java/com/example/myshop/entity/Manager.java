@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.myshop;
+package com.example.myshop.entity;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -60,20 +60,10 @@ public class Manager {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Manager manager = (Manager) o;
-		return Objects.equals(id, manager.id) &&
-			Objects.equals(name, manager.name) &&
-			Objects.equals(password, manager.password) &&
-			Arrays.equals(roles, manager.roles);
+		return Objects.equals(id, manager.id);
 	}
 
-	@Override
-	public int hashCode() {
-
-		int result = Objects.hash(id, name, password);
-		result = 31 * result + Arrays.hashCode(roles);
-		return result;
-	}
-
+	
 	public Long getId() {
 		return id;
 	}

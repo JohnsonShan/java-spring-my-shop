@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.myshop;
+package com.example.myshop.entity;
 
 import java.util.Objects;
 
@@ -40,14 +40,12 @@ public class Product {
 
 	private @Version @JsonIgnore Long version;
 
-	private @ManyToOne Manager manager; // <1>
 
 	private Product() {}
 
-	public Product(String name, String description, Manager manager, Double price, Double oldPrice, String img) { // <2>
+		public Product(String name, String description, Double price, Double oldPrice, String img) { 
 		this.name = name;
 		this.description = description;
-		this.manager = manager;
 		this.price = price;
 		this.oldPrice = oldPrice;
 		this.img = img;
@@ -116,13 +114,7 @@ public class Product {
 		this.version = version;
 	}
 
-	public Manager getManager() {
-		return manager;
-	}
 
-	public void setManager(Manager manager) {
-		this.manager = manager;
-	}
 
 	@Override
 	public String toString() {
@@ -134,7 +126,6 @@ public class Product {
 			", oldPrice='" + oldPrice + '\'' +
 			", img='" + img + '\'' +
 			", version=" + version +
-			", manager=" + manager +
 			'}';
 	}
 }

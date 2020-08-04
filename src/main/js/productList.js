@@ -66,6 +66,7 @@ export default class ProductList extends React.Component {
           loggedInManager={this.props.loggedInManager}
           cart={this.props.cart}
           updateCartFromCookie={this.props.updateCartFromCookie}
+          postPhoto={this.props.postPhoto}
         />
       );
     });

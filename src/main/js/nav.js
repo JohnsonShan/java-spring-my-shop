@@ -18,12 +18,13 @@ export default class Nav extends React.Component {
         </div>
         <div className="col-8 d-flex flex-row justify-content-end align-items-end">
           {this.props.auth ? (
-            <CreateDialog 
-            attributes={this.props.attributes}
-            onCreate={this.props.onCreate}
+            <CreateDialog
+              attributes={this.props.attributes}
+              onCreate={this.props.onCreate}
+              postPhoto={this.props.postPhoto}
             />
-            // <button className="m-2 btn btn-success">Add New Product</button>
           ) : (
+            // <button className="m-2 btn btn-success">Add New Product</button>
             <div></div>
           )}
 

@@ -15,6 +15,11 @@
  */
 package com.example.myshop;
 
+import com.example.myshop.entity.Manager;
+import com.example.myshop.entity.ManagerRepository;
+import com.example.myshop.entity.Product;
+import com.example.myshop.entity.ProductRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -35,28 +40,30 @@ public class DatabaseLoader implements CommandLineRunner { // <2>
 		this.managers = managerRepository;
 	}
 
+	
+
 	@Override
 	public void run(final String... strings) throws Exception { // <4>
-		Manager johnson = this.managers.save(new Manager("johnson", "johnsonabcd", "Admin"));
+		Manager johnson = this.managers.save(new Manager("johnson", "johnsonabcd", "ROLE_ADMIN"));
 
 		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("johnson",
-				"doesn't matter", AuthorityUtils.createAuthorityList("Admin")));
+				"doesn't matter", AuthorityUtils.createAuthorityList("ROLE_ADMIN")));
 
 		for (int i = 1; i < 6; i++) {
-			this.repository.save(new Product("pasta" + i, "pasta" + i, johnson, (double) 100 + i + 0.9,
-					(double) 200 + i + 0.9, "pasta" + i + ".jpg"));
+			this.repository.save(new Product("pasta" + i, "description" + i,  (double) 100 + i + 0.9,
+					(double) 200 + i + 0.9, "/images/pasta" + i + ".jpg"));
 		}
 		for (int i = 1; i < 6; i++) {
-			this.repository.save(new Product("risotto" + i, "risotto" + i, johnson, (double) 100 + i + 0.9,
-					(double) 200 + i + 0.9, "risotto" + i + ".jpg"));
+			this.repository.save(new Product("risotto" + i, "description" + i,  (double) 100 + i + 0.9,
+					(double) 200 + i + 0.9, "/images/risotto" + i + ".jpg"));
 		}
 		for (int i = 1; i < 6; i++) {
-			this.repository.save(new Product("pizza" + i, "pizza" + i, johnson, (double) 100 + i + 0.9,
-					(double) 200 + i + 0.9, "pizza" + i + ".jpg"));
+			this.repository.save(new Product("pizza" + i, "description" + i,  (double) 100 + i + 0.9,
+					(double) 200 + i + 0.9, "/images/pizza" + i + ".jpg"));
 		}
 		for (int i = 1; i < 6; i++) {
-			this.repository.save(new Product("burger" + i, "burger" + i, johnson, (double) 100 + i + 0.9,
-					(double) 200 + i + 0.9, "burger" + i + ".jpg"));
+			this.repository.save(new Product("burger" + i, "description" + i, (double) 100 + i + 0.9,
+					(double) 200 + i + 0.9, "/images/burger" + i + ".jpg"));
 		}
 		SecurityContextHolder.clearContext();
 	}

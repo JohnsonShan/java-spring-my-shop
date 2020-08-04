@@ -13,7 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.myshop;
+package com.example.myshop.security;
+
+
+import com.example.myshop.entity.Manager;
+import com.example.myshop.entity.ManagerRepository;
+import com.example.myshop.entity.Product;
+import com.example.myshop.entity.ProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;

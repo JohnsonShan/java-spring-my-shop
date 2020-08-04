@@ -15,6 +15,11 @@
  */
 package com.example.myshop;
 
+import com.example.myshop.entity.Manager;
+import com.example.myshop.entity.ManagerRepository;
+import com.example.myshop.entity.Product;
+import com.example.myshop.entity.ProductRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.core.annotation.HandleBeforeCreate;
 import org.springframework.data.rest.core.annotation.HandleBeforeSave;
@@ -39,15 +44,15 @@ public class SpringDataRestEventHandler {
 	@HandleBeforeSave
 	public void applyUserInformationUsingSecurityContext(Product product) {
 
-		String name = SecurityContextHolder.getContext().getAuthentication().getName();
-		Manager manager = this.managerRepository.findByName(name);
-		if (manager == null) {
-			Manager newManager = new Manager();
-			newManager.setName(name);
-			newManager.setRoles(new String[]{"ROLE_MANAGER"});
-			manager = this.managerRepository.save(newManager);
-		}
-		product.setManager(manager);
+		// String name = SecurityContextHolder.getContext().getAuthentication().getName();
+		// Manager manager = this.managerRepository.findByName(name);
+		// if (manager == null) {
+		// 	Manager newManager = new Manager();
+		// 	newManager.setName(name);
+		// 	newManager.setRoles(new String[]{"Admin"});
+		// 	manager = this.managerRepository.save(newManager);
+		// }
+		// product.setManager(manager);
 	}
 }
 // end::code[]

@@ -15,16 +15,35 @@
  */
 package com.example.myshop;
 
+import com.example.myshop.storage.StorageProperties;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 
+import com.example.myshop.storage.StorageProperties;
+import com.example.myshop.storage.StorageService;
 
 // tag::code[]
+@EnableConfigurationProperties(StorageProperties.class)
 @SpringBootApplication
 public class ReactAndSpringDataRestApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ReactAndSpringDataRestApplication.class, args);
+	}
+
+	@Bean
+	CommandLineRunner init(StorageService storageService) {
+		return (args) -> {
+			// storageService.deleteAll();
+			storageService.init();
+		};
 	}
 }
 // end::code[]

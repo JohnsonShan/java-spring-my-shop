@@ -20,6 +20,7 @@ export default class Product extends React.Component {
       let expires = "expires=" + d.toUTCString();
       document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     }
+
     function getCookie(cname) {
       let name = cname + "=";
       let ca = document.cookie.split(";");
@@ -64,17 +65,16 @@ export default class Product extends React.Component {
       <div className=" d-flex flex-column justify-content-center align-items-start col-6 col-sm-6 col-md-3">
         <div className="h-75 d-flex flex-column justify-content-center align-items-center">
           <img
-            className="image-fluid img-thumbnail"
-            src={`/images/${this.props.product.entity.img}`}
+            className="image-fluid img-thumbnail "
+            src={this.props.product.entity.img}
           />
         </div>
-
-        <p>name: {this.props.product.entity.name}</p>
+        <p>{this.props.product.entity.name} </p>
+        <p>{this.props.product.entity.description}</p>
         <p>
-          <s>old price: {this.props.product.entity.oldPrice}</s>
+          <s>HK${this.props.product.entity.oldPrice} </s>
         </p>
-        <p>price: {this.props.product.entity.price}</p>
-
+        <p>HK${this.props.product.entity.price} </p>
         <div className="d-flex flex-column justify-content-center align-items-center w-100 mb-5">
           <button
             onClick={this.handleAddToCart}
@@ -82,18 +82,17 @@ export default class Product extends React.Component {
           >
             Add to Cart
           </button>
-
           {this.props.auth ? (
             <UpdateDialog
               product={this.props.product}
               attributes={this.props.attributes}
               onUpdate={this.props.onUpdate}
               loggedInManager={this.props.loggedInManager}
+              postPhoto={this.props.postPhoto}
             />
           ) : (
-            <div></div>
+            <div> </div>
           )}
-
           {this.props.auth ? (
             <button
               onClick={this.handleDelete}
@@ -102,10 +101,9 @@ export default class Product extends React.Component {
               Delete
             </button>
           ) : (
-            <div></div>
+            <div> </div>
           )}
         </div>
-
       </div>
     );
   }

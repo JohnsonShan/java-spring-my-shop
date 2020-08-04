@@ -13,9 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.myshop;
+package com.example.myshop.websocket;
 
-import static com.example.myshop.WebSocketConfiguration.*;
+import static com.example.myshop.websocket.WebSocketConfiguration.MESSAGE_PREFIX;
+
+import com.example.myshop.entity.Product;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.core.annotation.HandleAfterCreate;
