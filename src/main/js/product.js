@@ -61,12 +61,13 @@ export default class Product extends React.Component {
   }
   render() {
     // console.log('this.props.product.url',this.props.product.url.substr(this.props.product.url.lastIndexOf('/')));
+
     return (
       <div className=" d-flex flex-column justify-content-center align-items-start col-6 col-sm-6 col-md-3">
         <div className="h-75 d-flex flex-column justify-content-center align-items-center">
           <img
             className="image-fluid img-thumbnail "
-            src={this.props.product.entity.img}
+            src={this.props.product.entity.image}
           />
         </div>
         <p>{this.props.product.entity.name} </p>
@@ -83,7 +84,6 @@ export default class Product extends React.Component {
             Add to Cart
           </button>
           {this.props.auth ? (
-            
             <UpdateDialog
               product={this.props.product}
               attributes={this.props.attributes}

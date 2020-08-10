@@ -15,7 +15,7 @@
  */
 package com.example.myshop.security;
 
-import com.example.myshop.entity.Manager;
+import com.example.myshop.domain.Admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -39,7 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter { // <3>
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth
 			.userDetailsService(this.userDetailsService)
-				.passwordEncoder(Manager.PASSWORD_ENCODER);
+				.passwordEncoder(Admin.PASSWORD_ENCODER);
 	}
 
 	@Override

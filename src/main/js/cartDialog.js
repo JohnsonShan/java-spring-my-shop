@@ -8,20 +8,13 @@ import client from "./api/client";
 export default class CartDialog extends React.Component {
   constructor(props) {
     super(props);
-
-
-  
   }
 
-
-
   render() {
-    window.addEventListener("load", this.handleCart);
+    // window.addEventListener("load", this.handleCart);
     let total = 0.0;
     return (
       <div>
-
-
         <div
           id="cartModal"
           className="modal fade"
@@ -61,7 +54,7 @@ export default class CartDialog extends React.Component {
                       <div className="col-3">
                         <img
                           className="image-fluid img-thumbnail "
-                          src={item.img}
+                          src={item.image}
                         />
                       </div>
                       <div className="col-3">{item.name}</div>

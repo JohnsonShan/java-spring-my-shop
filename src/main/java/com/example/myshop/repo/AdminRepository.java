@@ -13,7 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.myshop.entity;
+package com.example.myshop.repo;
+
+import com.example.myshop.domain.Admin;
 
 import org.springframework.data.repository.Repository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
@@ -21,11 +23,11 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 // tag::code[]
 @RepositoryRestResource(exported = false)
-public interface ManagerRepository extends Repository<Manager, Long> {
+public interface AdminRepository extends Repository<Admin, Long> {
 
-	Manager save(Manager manager);
+	Admin save(Admin admin);
 
-	Manager findByName(String name);
+	Admin findByName(String name);
 
 }
 // end::code[]

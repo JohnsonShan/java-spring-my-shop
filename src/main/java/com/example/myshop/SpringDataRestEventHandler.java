@@ -15,10 +15,10 @@
  */
 package com.example.myshop;
 
-import com.example.myshop.entity.Manager;
-import com.example.myshop.entity.ManagerRepository;
-import com.example.myshop.entity.Product;
-import com.example.myshop.entity.ProductRepository;
+import com.example.myshop.domain.Admin;
+import com.example.myshop.domain.Product;
+import com.example.myshop.repo.AdminRepository;
+import com.example.myshop.repo.ProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.core.annotation.HandleBeforeCreate;
@@ -33,10 +33,10 @@ import org.springframework.stereotype.Component;
 @RepositoryEventHandler(Product.class) // <1>
 public class SpringDataRestEventHandler {
 
-	private final ManagerRepository managerRepository;
+	private final AdminRepository managerRepository;
 
 	@Autowired
-	public SpringDataRestEventHandler(ManagerRepository managerRepository) {
+	public SpringDataRestEventHandler(AdminRepository managerRepository) {
 		this.managerRepository = managerRepository;
 	}
 

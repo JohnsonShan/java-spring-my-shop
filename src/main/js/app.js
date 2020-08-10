@@ -82,7 +82,7 @@ class App extends React.Component {
           path: cookieCart[i],
         }).done((product) => {
           cart.push({
-            img: product.entity.img,
+            image: product.entity.image,
             name: product.entity.name,
             price: product.entity.price,
             quantity: cookieCart[i + 1],
@@ -166,7 +166,7 @@ class App extends React.Component {
 
   // tag::on-update[]
   onUpdate(product, updatedProduct) {
-    updatedProduct["manager"] = product.entity.manager;
+    console.log("product", product);
     client({
       method: "PUT",
       path: product.entity._links.self.href,
@@ -368,7 +368,6 @@ class App extends React.Component {
           <div id="logo" className="card mb-5 d-none d-md-block mt-3">
             <a className="stretched-link" href="/">
               <i className="fas fa-robot rounded text-dark ">
-
                 &nbsp;Johnson'shop
               </i>
             </a>

@@ -6,7 +6,7 @@ export default class UpdateDialog extends React.Component {
     super(props);
 
     this.state = {
-      img: this.props.product.entity.img,
+      image: this.props.product.entity.image,
       name: this.props.product.entity.name,
       description: this.props.product.entity.description,
       price: this.props.product.entity.price,
@@ -14,7 +14,7 @@ export default class UpdateDialog extends React.Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleImg = this.handleImg.bind(this);
+    this.handleImage = this.handleImage.bind(this);
     this.handlePreview = this.handlePreview.bind(this);
   }
 
@@ -37,16 +37,16 @@ export default class UpdateDialog extends React.Component {
     window.location = "#";
   }
 
-  handleImg(e) {
+  handleImage(e) {
     let reader = new FileReader();
     reader.onload = () => {
       this.setState({
-        img: reader.result,
+        image: reader.result,
       });
     };
     reader.readAsDataURL(e.target.files[0]);
 
-    ReactDOM.findDOMNode(this.refs["img"]).value =
+    ReactDOM.findDOMNode(this.refs["image"]).value =
       "\\images" + e.target.value.substring(e.target.value.lastIndexOf("\\"));
   }
 
@@ -83,10 +83,10 @@ export default class UpdateDialog extends React.Component {
           i
         }
       >
-        {attribute == "img" ? (
+        {attribute == "image" ? (
           <div>
             <input
-              // value={this.state.img}
+
               id={attribute}
               type="text"
               placeholder={attribute}
@@ -104,7 +104,7 @@ export default class UpdateDialog extends React.Component {
               // disabled
               // onClick={this.handleUpload}
               // onChange={()=>{console.log('change')}}
-              onChange={this.handleImg}
+              onChange={this.handleImage}
             />
           </div>
         ) : (

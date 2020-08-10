@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.myshop.entity;
+package com.example.myshop.domain;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 // tag::code[]
 @Entity
-public class Manager {
+public class Admin {
 
 	public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder(); // <1>
 
@@ -46,9 +46,9 @@ public class Manager {
 		this.password = PASSWORD_ENCODER.encode(password);
 	}
 
-	protected Manager() {}
+	protected Admin() {}
 
-	public Manager(String name, String password, String... roles) {
+	public Admin(String name, String password, String... roles) {
 
 		this.name = name;
 		this.setPassword(password);
@@ -59,7 +59,7 @@ public class Manager {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		Manager manager = (Manager) o;
+		Admin manager = (Admin) o;
 		return Objects.equals(id, manager.id);
 	}
 

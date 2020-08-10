@@ -17,7 +17,7 @@ package com.example.myshop.websocket;
 
 import static com.example.myshop.websocket.WebSocketConfiguration.MESSAGE_PREFIX;
 
-import com.example.myshop.entity.Product;
+import com.example.myshop.domain.Product;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.core.annotation.HandleAfterCreate;

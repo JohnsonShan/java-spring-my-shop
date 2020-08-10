@@ -11,7 +11,7 @@ export default class CreateDialog extends React.Component {
     super(props);
 
     this.state = {
-      img: "/images/product.png",
+      image: "/images/product.png",
       name: "",
       description: "",
       price: "",
@@ -19,7 +19,7 @@ export default class CreateDialog extends React.Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleImg = this.handleImg.bind(this);
+    this.handleImage = this.handleImage.bind(this);
     this.handlePreview = this.handlePreview.bind(this);
   }
 
@@ -45,16 +45,16 @@ export default class CreateDialog extends React.Component {
     window.location = "#";
   }
 
-  handleImg(e) {
+  handleImage(e) {
     let reader = new FileReader();
     reader.onload = () => {
       this.setState({
-        img: reader.result,
+        image: reader.result,
       });
     };
     reader.readAsDataURL(e.target.files[0]);
 
-    ReactDOM.findDOMNode(this.refs["img"]).value =
+    ReactDOM.findDOMNode(this.refs["image"]).value =
       "\\images" + e.target.value.substring(e.target.value.lastIndexOf("\\"));
   }
 
@@ -85,10 +85,10 @@ export default class CreateDialog extends React.Component {
     const inputs = this.props.attributes.map((attribute) => {
       return (
         <div key={attribute}>
-          {attribute == "img" ? (
+          {attribute == "image" ? (
             <div>
               <input
-                // value={this.state.img}
+                // value={this.state.image}
                 id={attribute}
                 type="text"
                 placeholder={attribute}
@@ -106,7 +106,7 @@ export default class CreateDialog extends React.Component {
                 // disabled
                 // onClick={this.handleUpload}
                 // onChange={()=>{console.log('change')}}
-                onChange={this.handleImg}
+                onChange={this.handleImage}
               />
             </div>
           ) : (
@@ -156,7 +156,7 @@ export default class CreateDialog extends React.Component {
                 <div className="d-flex flex-column justify-content-center align-items-center w-50">
                   <img
                     className="image-fluid img-thumbnail"
-                    src={this.state.img}
+                    src={this.state.image}
                   />
                 </div>
 

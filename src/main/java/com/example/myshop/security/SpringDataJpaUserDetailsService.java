@@ -16,10 +16,10 @@
 package com.example.myshop.security;
 
 
-import com.example.myshop.entity.Manager;
-import com.example.myshop.entity.ManagerRepository;
-import com.example.myshop.entity.Product;
-import com.example.myshop.entity.ProductRepository;
+import com.example.myshop.domain.Admin;
+import com.example.myshop.domain.Product;
+import com.example.myshop.repo.AdminRepository;
+import com.example.myshop.repo.ProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -34,16 +34,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class SpringDataJpaUserDetailsService implements UserDetailsService {
 
-	private final ManagerRepository repository;
+	private final AdminRepository repository;
 
 	@Autowired
-	public SpringDataJpaUserDetailsService(ManagerRepository repository) {
+	public SpringDataJpaUserDetailsService(AdminRepository repository) {
 		this.repository = repository;
 	}
 
 	@Override
 	public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-		Manager manager = this.repository.findByName(name);
+		Admin manager = this.repository.findByName(name);
 		return new User(manager.getName(), manager.getPassword(),
 				AuthorityUtils.createAuthorityList(manager.getRoles()));
 	}
