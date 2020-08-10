@@ -8,50 +8,19 @@ import client from "./api/client";
 export default class CartDialog extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      cartObj: [],
-    };
 
-    this.handleCart = this.handleCart.bind(this);
+
+  
   }
 
-  handleCart() {
-    let cartObj = [];
 
-    this.props.cart.map((item, i) => {
-      if (i % 2 == 0) {
-        return client({
-          method: "GET",
-          path: this.props.cart[i],
-        }).done((product) => {
-          cartObj.push({
-            img: product.entity.img,
-            name: product.entity.name,
-            price: product.entity.price,
-            quantity: this.props.cart[i + 1],
-          });
 
-          this.setState({
-            cartObj: cartObj,
-          });
-        });
-      }
-    });
-  }
   render() {
     window.addEventListener("load", this.handleCart);
     let total = 0.0;
     return (
       <div>
-        <button
-          className="m-2 btn btn-outline-primary"
-          // href="#cart"
-          onClick={this.handleCart}
-          data-toggle="modal"
-          data-target="#cartModal"
-        >
-          Cart {this.props.cart.length ? `(${this.props.cart.length / 2})` : ""}
-        </button>
+
 
         <div
           id="cartModal"
@@ -85,7 +54,7 @@ export default class CartDialog extends React.Component {
                   </div>
                 </div>
 
-                {this.state.cartObj.map((item, i) => {
+                {this.props.cart.map((item, i) => {
                   total += parseFloat(item.price) * parseFloat(item.quantity);
                   return (
                     <div key={i} className="row">
