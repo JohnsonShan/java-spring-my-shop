@@ -20,14 +20,18 @@ import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+// import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+// import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-// tag::code[]
-@Entity
+import lombok.Data;
+
+@Data
+@Document(collection = "products")
 public class Product {
 
 	private @Id @GeneratedValue Long id;
@@ -36,83 +40,19 @@ public class Product {
 	private Double price;
 	private Double oldPrice;
 
-	private String img;
-
-	private @Version @JsonIgnore Long version;
+	private String image;
 
 
-	private Product() {}
 
-		public Product(String name, String description, Double price, Double oldPrice, String img) { 
+		public Product(String name, String description, Double price, Double oldPrice, String image) { 
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.oldPrice = oldPrice;
-		this.img = img;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		Product product = (Product) o;
-		return Objects.equals(id, product.id);
+		this.image = image;
 	}
 
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Double getPrice(){
-		return price;
-	}
-	public void setPrice(Double price){
-		this.price = price;
-	}
-	public Double getOldPrice(){
-		return oldPrice;
-	}
-	public void setOldPrice(Double oldPrice){
-		this.oldPrice = oldPrice;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getImg() {
-		return img;
-	}
-
-	public void setImg(String img) {
-		this.img = img;
-	}
-
-
-	public Long getVersion() {
-		return version;
-	}
-
-	public void setVersion(Long version) {
-		this.version = version;
-	}
 
 
 
@@ -125,7 +65,7 @@ public class Product {
 			", price='" + price +'\'' +
 			", oldPrice='" + oldPrice + '\'' +
 			", img='" + img + '\'' +
-			", version=" + version +
+			// ", version=" + version +
 			'}';
 	}
 }
