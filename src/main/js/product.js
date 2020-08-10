@@ -83,7 +83,6 @@ export default class Product extends React.Component {
             Add to Cart
           </button>
           {this.props.auth ? (
-            
             <UpdateDialog
               product={this.props.product}
               attributes={this.props.attributes}

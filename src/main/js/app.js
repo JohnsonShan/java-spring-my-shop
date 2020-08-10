@@ -39,16 +39,15 @@ class App extends React.Component {
     this.refreshCurrentPage = this.refreshCurrentPage.bind(this);
     this.refreshAndGoToLastPage = this.refreshAndGoToLastPage.bind(this);
     this.updateCartFromCookie = this.updateCartFromCookie.bind(this);
-    // this.handleCart = this.handleCart.bind(this);
     this.postPhoto = this.postPhoto.bind(this);
   }
 
   postPhoto(form) {
-    fetch("/uploadPhoto", {
-      method: "POST",
+    fetch('/uploadPhoto', {
+      method: 'POST',
       body: form,
-    }).then(() => {
-      console.log("upload done");
+    }).then(()=>{
+      console.log('upload done')
     });
   }
 
@@ -68,31 +67,13 @@ class App extends React.Component {
       return "";
     }
 
-    let cookieCart = getCookie("cart").split(", ");
-    if (cookieCart[0] == "") {
-      cookieCart.splice(0, 1);
+    let cart = getCookie("cart").split(", ");
+    if (cart[0] == "") {
+      cart.splice(0, 1);
     }
 
-    let cart = [];
-
-    cookieCart.map((item, i) => {
-      if (i % 2 == 0) {
-        return client({
-          method: "GET",
-          path: cookieCart[i],
-        }).done((product) => {
-          cart.push({
-            img: product.entity.img,
-            name: product.entity.name,
-            price: product.entity.price,
-            quantity: cookieCart[i + 1],
-          });
-
-          this.setState({
-            cart: cart,
-          });
-        });
-      }
+    this.setState({
+      cart: cart,
     });
   }
 
@@ -335,7 +316,11 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="d-flex flex-column justify-content-center align-items-center">
+      <div className="container d-flex flex-column justify-content-center align-items-center">
+        {/* <div className="container-fluid d-flex flex-column justify-content-center align-items-center d-none">
+          notice
+        </div> */}
+
         <Nav
           login={this.state.loggedInManager}
           auth={this.state.auth}
@@ -343,61 +328,40 @@ class App extends React.Component {
           cart={this.state.cart}
           updateCartFromCookie={this.updateCartFromCookie}
           attributes={this.state.attributes}
-          // onCreate={this.onCreate}
-          // postPhoto={this.postPhoto}
-        />
-
-        <CreateDialog
-          attributes={this.state.attributes}
           onCreate={this.onCreate}
           postPhoto={this.postPhoto}
         />
 
-        <CartDialog
+        <div id="logo" className="card mb-5">
+          <a className="stretched-link" href="/">
+            <i className="fas fa-robot rounded text-dark "> Johnson'shop</i>
+          </a>
+        </div>
+
+        {/* <div className="container-fluid d-flex flex-column justify-content-center align-items-center">
+          slide or highlight
+        </div>
+
+        <div>category</div>
+        <div>highlight/default product list</div>
+        <div>footer</div> */}
+
+        <ProductList
+          page={this.state.page}
           products={this.state.products}
+          links={this.state.links}
+          pageSize={this.state.pageSize}
+          attributes={this.state.attributes}
+          onNavigate={this.onNavigate}
+          onUpdate={this.onUpdate}
+          onDelete={this.onDelete}
+          updatePageSize={this.updatePageSize}
+          auth={this.state.auth}
+          loggedInManager={this.state.loggedInManager}
           cart={this.state.cart}
-          // updateCartFromCookie={this.updateCartFromCookie}
+          updateCartFromCookie={this.updateCartFromCookie}
+          postPhoto={this.postPhoto}
         />
-
-        {/* <div className='mb-4'>&nbsp;</div> */}
-
-        <div
-          id="body"
-          className="container d-flex flex-column justify-content-center align-items-center "
-        >
-          <div id="logo" className="card mb-5 d-none d-md-block mt-3">
-            <a className="stretched-link" href="/">
-              <i className="fas fa-robot rounded text-dark ">
-
-                &nbsp;Johnson'shop
-              </i>
-            </a>
-          </div>
-
-          <ProductList
-            page={this.state.page}
-            products={this.state.products}
-            links={this.state.links}
-            pageSize={this.state.pageSize}
-            attributes={this.state.attributes}
-            onNavigate={this.onNavigate}
-            onUpdate={this.onUpdate}
-            onDelete={this.onDelete}
-            updatePageSize={this.updatePageSize}
-            auth={this.state.auth}
-            loggedInManager={this.state.loggedInManager}
-            cart={this.state.cart}
-            updateCartFromCookie={this.updateCartFromCookie}
-            postPhoto={this.postPhoto}
-          />
-        </div>
-
-        <div
-          id="footer"
-          className="container-fluid d-flex flex-column justify-content-center align-items-center p-4"
-        >
-          <p>© Copyright 2020 Johnson Shan - All Rights Reserved.</p>
-        </div>
       </div>
     );
   }

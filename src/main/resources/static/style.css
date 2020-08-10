@@ -6,10 +6,6 @@
 
 * {
     font-family: 'Noto Serif TC', serif;
-    /* transition: all 0.5s; */
-}
-.transition-500 {
-    transition: all 500ms;
 }
 
 h1,
@@ -78,9 +74,7 @@ i {
 .min-height-20 {
     min-height: 20vh;
 }
-.max-height-10{
-    max-height: 10vh;
-}
+
 .max-height-20 {
     max-height: 20vh;
 }
@@ -100,7 +94,8 @@ i {
 
 .add-thin-line {
     width: 100%;
-    border-top: 1px solid rgb(179, 174, 174);
+    border-top: 2px solid rgb(179, 174, 174);
+    margin-bottom: 5vh;
 }
 
 
@@ -131,26 +126,8 @@ i {
     opacity: 0.7;
 }
 
-.fade-in {
-    max-width: 100%;
-    max-height: 100%;
-    opacity: 0;
-}
-
-.from-top {
-    transform: translateY(-30%);
-}
-
-.pointer-none{
-    pointer-events:none;
-}
-.pointer-auto{
-    pointer-events: auto;
-}
 @media only screen and (min-width: 992px) {
-    i {
-        font-size: 3rem;
-    }  
+
     .bg-day:hover {
         background-color: #1c2845;
     }
@@ -165,15 +142,6 @@ i {
     }
     .rwd-width {
         width: 85vw;
-    }
-}
-@media only screen and (max-width: 992px) {
-
-    i {
-        font-size: 3rem;
-    }    
-    .rwd-width {
-        width: 90vw;
     }
 }
 

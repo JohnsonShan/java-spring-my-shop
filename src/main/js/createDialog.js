@@ -124,6 +124,14 @@ export default class CreateDialog extends React.Component {
     });
     return (
       <div>
+        <button
+          type="button"
+          className="m-2 btn btn-success"
+          data-toggle="modal"
+          data-target="#createModal"
+        >
+          Add New Product
+        </button>
 
         <div
           id="createModal"
