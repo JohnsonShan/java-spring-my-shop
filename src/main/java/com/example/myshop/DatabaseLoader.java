@@ -50,15 +50,9 @@ public class DatabaseLoader implements CommandLineRunner { // <2>
 	@Override
 	public void run(final String... strings) throws Exception { // <4>
 
-		Admin johnson = AdminRepository.save(new Admin("johnson", "johnsonabcd", "ROLE_ADMIN"));
-		
-		// deleteAll();
-		// ProductRepository.deleteAll();
-
-		// addSampleData();
-		
-		// listAll();
-		ProductRepository.findAll();
+		deleteAll();
+		addSampleData();
+		listAll();
 	}
 
 	public void deleteAll() {
@@ -69,7 +63,7 @@ public class DatabaseLoader implements CommandLineRunner { // <2>
 	public void addSampleData() {
 		System.out.println("Adding sample data");
 
-		// Admin johnson = AdminRepository.save(new Admin("johnson", "johnsonabcd", "ROLE_ADMIN"));
+		Admin johnson = AdminRepository.save(new Admin("johnson", "johnsonabcd", "ROLE_ADMIN"));
 
 		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("johnson",
 				"doesn't matter", AuthorityUtils.createAuthorityList("ROLE_ADMIN")));
