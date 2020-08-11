@@ -144,7 +144,8 @@ class App extends React.Component {
         this.setState({
           page: this.page,
           products: products,
-          attributes: Object.keys(this.schema.properties),
+          // attributes: Object.keys(this.schema.properties),
+          attributes: ["image","name","summary","price","oldPrice"],
           pageSize: pageSize,
           links: this.links,
         });

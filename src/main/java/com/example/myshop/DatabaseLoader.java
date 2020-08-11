@@ -69,7 +69,8 @@ public class DatabaseLoader implements CommandLineRunner { // <2>
 		System.out.println("Adding sample data");
 
 		Admin johnson = AdminRepository.save(new Admin("johnson", "johnsonabcd", "ROLE_ADMIN"));
-
+		Admin admin = AdminRepository.save(new Admin("admin", "adminabcd", "ROLE_ADMIN"));
+		
 		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("johnson",
 				"doesn't matter", AuthorityUtils.createAuthorityList("ROLE_ADMIN")));
 

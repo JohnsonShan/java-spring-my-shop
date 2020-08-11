@@ -34,7 +34,7 @@ public class Product {
 	private Double price;
 	private Double oldPrice;
 	private String image;
-	// private @Version @JsonIgnore Long version;
+	private @Version @JsonIgnore Long version;
 
 
 
