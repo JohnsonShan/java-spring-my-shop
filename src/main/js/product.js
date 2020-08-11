@@ -71,7 +71,7 @@ export default class Product extends React.Component {
           />
         </div>
         <p>{this.props.product.entity.name} </p>
-        <p>{this.props.product.entity.summary}</p>
+        <p>{this.props.product.entity.description}</p>
         <p>
           <s>HK${this.props.product.entity.oldPrice} </s>
         </p>

@@ -16,7 +16,6 @@
 package com.example.myshop.domain;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Version;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Data;
@@ -26,21 +25,18 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Data
 @Document(collection = "products")
 public class Product {
-
+	
 	@Id
 	private String id;
 	private String name;
-	private String summary;
+	private String description;
 	private Double price;
 	private Double oldPrice;
 	private String image;
-	// private @Version @JsonIgnore Long version;
 
-
-
-	public Product(String name, String summary, Double price, Double oldPrice, String image) {
+	public Product(String name, String description, Double price, Double oldPrice, String image) {
 		this.name = name;
-		this.summary = summary;
+		this.description = description;
 		this.price = price;
 		this.oldPrice = oldPrice;
 		this.image = image;
@@ -49,13 +45,5 @@ public class Product {
 	public String getId() {
 		return id;
 	}
-
-	// public Long getVersion() {
-	// 	return version;
-	// }
-
-	// public void setVersion(Long version) {
-	// 	this.version = version;
-	// }
-
 }
+// end::code[]

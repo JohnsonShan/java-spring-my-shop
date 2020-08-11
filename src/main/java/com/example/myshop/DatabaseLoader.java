@@ -50,11 +50,6 @@ public class DatabaseLoader implements CommandLineRunner { // <2>
 	@Override
 	public void run(final String... strings) throws Exception { // <4>
 
-
-		// ProductRepository.findAll();
-
-		// Admin johnson = AdminRepository.save(new Admin("johnson", "johnsonabcd", "ROLE_ADMIN"));
-
 		deleteAll();
 		addSampleData();
 		listAll();
@@ -98,9 +93,7 @@ public class DatabaseLoader implements CommandLineRunner { // <2>
 
 	public void listAll() {
 		System.out.println("Listing sample data");
-		// ProductRepository.findAll().forEach(p -> System.out.println(p));
-		ProductRepository.findAll().forEach(p -> System.out.println(p.toString()));
-
+		ProductRepository.findAll().forEach(u -> System.out.println(u));
 	}
 
 }

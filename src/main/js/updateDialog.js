@@ -8,7 +8,7 @@ export default class UpdateDialog extends React.Component {
     this.state = {
       image: this.props.product.entity.image,
       name: this.props.product.entity.name,
-      summary: this.props.product.entity.summary,
+      description: this.props.product.entity.description,
       price: this.props.product.entity.price,
       oldPrice: this.props.product.entity.oldPrice,
     };
@@ -66,9 +66,9 @@ export default class UpdateDialog extends React.Component {
         name: e.target.value,
       });
     }
-    if (e.target.id == "summary") {
+    if (e.target.id == "description") {
       this.setState({
-        summary: e.target.value,
+        description: e.target.value,
       });
     }
   }
@@ -177,7 +177,7 @@ export default class UpdateDialog extends React.Component {
                 </div>
 
                 <p>{this.state.name}</p>
-                <p>{this.state.summary}</p>
+                <p>{this.state.description}</p>
                 <p>
                   <s>HK${this.state.oldPrice}</s>
                 </p>
