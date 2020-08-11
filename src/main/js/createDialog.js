@@ -13,7 +13,7 @@ export default class CreateDialog extends React.Component {
     this.state = {
       image: "/images/product.png",
       name: "",
-      description: "",
+      summary: "",
       price: "",
       oldPrice: "",
     };
@@ -74,9 +74,9 @@ export default class CreateDialog extends React.Component {
         name: e.target.value,
       });
     }
-    if (e.target.id == "description") {
+    if (e.target.id == "summary") {
       this.setState({
-        description: e.target.value,
+        summary: e.target.value,
       });
     }
   }
@@ -161,7 +161,7 @@ export default class CreateDialog extends React.Component {
                 </div>
 
                 <p>{this.state.name || "name"}</p>
-                <p>{this.state.description || "description"}</p>
+                <p>{this.state.summary || "summary"}</p>
                 <p>
                   <s>{this.state.oldPrice || "old price"}</s>
                 </p>
