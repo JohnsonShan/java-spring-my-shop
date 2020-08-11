@@ -15,10 +15,13 @@
  */
 package com.example.myshop;
 
+
 import com.example.myshop.domain.Admin;
 import com.example.myshop.domain.Product;
+import com.example.myshop.domain.User;
 import com.example.myshop.repo.AdminRepository;
 import com.example.myshop.repo.ProductRepository;
+import com.example.myshop.repo.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -31,29 +34,22 @@ import org.springframework.stereotype.Component;
 @Component // <1>
 public class DatabaseLoader implements CommandLineRunner { // <2>
 
-	// private final ProductRepository ProductRepository;
-	// private final ManagerRepository ManagerRepository;
 
-	// @Autowired // <3>
-	// public DatabaseLoader(final ProductRepository ProductRepository,
-	// ManagerRepository ManagerRepository) {
-	// this.ProductRepository = ProductRepository;
-	// this.ManagerRepository = ManagerRepository;
-	// }
 
-	@Autowired
-	AdminRepository AdminRepository;
+	// @Autowired
+	// AdminRepository AdminRepository;
 
 	@Autowired
 	ProductRepository ProductRepository;
 
+	@Autowired
+	UserRepository UserRepository;
+
 	@Override
 	public void run(final String... strings) throws Exception { // <4>
 
-
-		// ProductRepository.findAll();
-
 		// Admin johnson = AdminRepository.save(new Admin("johnson", "johnsonabcd", "ROLE_ADMIN"));
+		// Admin admin = AdminRepository.save(new Admin("admin", "adminabcd", "ROLE_ADMIN"));
 
 		deleteAll();
 		addSampleData();
@@ -63,16 +59,21 @@ public class DatabaseLoader implements CommandLineRunner { // <2>
 	public void deleteAll() {
 		System.out.println("Deleting all records..");
 		ProductRepository.deleteAll();
+		UserRepository.deleteAll();
+
 	}
 
 	public void addSampleData() {
 		System.out.println("Adding sample data");
 
-		Admin johnson = AdminRepository.save(new Admin("johnson", "johnsonabcd", "ROLE_ADMIN"));
-		Admin admin = AdminRepository.save(new Admin("admin", "adminabcd", "ROLE_ADMIN"));
-		
+
+
 		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("johnson",
 				"doesn't matter", AuthorityUtils.createAuthorityList("ROLE_ADMIN")));
+
+		UserRepository.save(new User("peter", "peterabcd", "peter@gmail.com"));
+		UserRepository.save(new User("tony", "tonyabcd", "tony@gmail.com"));
+		UserRepository.save(new User("tom", "tomabcd", "tom@gmail.com"));
 
 		for (int i = 1; i < 6; i++) {
 			ProductRepository.save(new Product("pasta" + i, "description" + i, (double) 100 + i + 0.9,
