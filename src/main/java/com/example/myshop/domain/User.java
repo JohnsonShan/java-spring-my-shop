@@ -26,6 +26,7 @@ import lombok.Data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+
 @Data
 @Document(collection = "users")
 public class User {
@@ -37,28 +38,39 @@ public class User {
     private String name;
     private String password;
     private String email;
+    private String[] roles = {"ROLE_USER"};
     private @Version @JsonIgnore Long version;
 
     public void setPassword(String password) { 
         this.password = PASSWORD_ENCODER.encode(password);
     }
 
+    protected User() {}
+
     public User(String name, String password, String email) {
         this.name = name;
         this.setPassword(password);
         this.email = email;
     }
-
+    
+    public User(String name, String password, String email, String... roles) {
+        this.name = name;
+        this.setPassword(password);
+        this.email = email;
+        this.roles = roles;
+    }
     public String getId() {
         return id;
     }
+	public String getName() {
+		return name;
+    }
+    public String getPassword() {
+		return password;
+    }
+    public String[] getRoles() {
+		return roles;
+	}
 
-    // public Long getVersion() {
-    // return version;
-    // }
-
-    // public void setVersion(Long version) {
-    // this.version = version;
-    // }
 
 }

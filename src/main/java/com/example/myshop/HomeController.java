@@ -43,7 +43,15 @@ public class HomeController {
 	public String index() {
 		return "index"; // <3>
 	}
-
+	// @RequestMapping(value="/sign-in")
+	// public String signin(){
+	// 	return "sign-in";
+	// }
+	// @RequestMapping(value="/sign-up")
+	// public String signup(){
+	// 	return "sign-up";
+	// }
+	
 	@PostMapping("/uploadPhoto")
 	public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
 

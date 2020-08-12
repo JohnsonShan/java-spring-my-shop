@@ -15,7 +15,8 @@
  */
 package com.example.myshop.security;
 
-import com.example.myshop.domain.Admin;
+// import com.example.myshop.domain.Admin;
+// import com.example.myshop.domain.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +25,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 // tag::code[]
@@ -32,6 +34,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableGlobalMethodSecurity(prePostEnabled = true) // <2>
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter { // <3>
 
+
 	@Autowired
 	private SpringDataJpaUserDetailsService userDetailsService; // <4>
 
@@ -39,7 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter { // <3>
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth
 			.userDetailsService(this.userDetailsService)
-				.passwordEncoder(Admin.PASSWORD_ENCODER);
+				.passwordEncoder(new BCryptPasswordEncoder());
 	}
 
 	@Override
@@ -52,6 +55,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter { // <3>
 				// .anyRequest().authenticated()
 				.and()
 			.formLogin()
+				// .loginPage("/sign_in")
 				.defaultSuccessUrl("/", true)
 				.permitAll()
 				.and()

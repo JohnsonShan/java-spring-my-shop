@@ -15,11 +15,11 @@
  */
 package com.example.myshop;
 
-
-import com.example.myshop.domain.Admin;
+// import com.example.myshop.domain.Admin;
 import com.example.myshop.domain.Product;
 import com.example.myshop.domain.User;
-import com.example.myshop.repo.AdminRepository;
+// import com.example.myshop.domain.UserRole;
+// import com.example.myshop.repo.AdminRepository;
 import com.example.myshop.repo.ProductRepository;
 import com.example.myshop.repo.UserRepository;
 
@@ -29,12 +29,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+// import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 // tag::code[]
 @Component // <1>
 public class DatabaseLoader implements CommandLineRunner { // <2>
-
-
 
 	// @Autowired
 	// AdminRepository AdminRepository;
@@ -48,32 +48,28 @@ public class DatabaseLoader implements CommandLineRunner { // <2>
 	@Override
 	public void run(final String... strings) throws Exception { // <4>
 
-		// Admin johnson = AdminRepository.save(new Admin("johnson", "johnsonabcd", "ROLE_ADMIN"));
-		// Admin admin = AdminRepository.save(new Admin("admin", "adminabcd", "ROLE_ADMIN"));
-
-		deleteAll();
-		addSampleData();
-		listAll();
+		// deleteAll();
+		// addSampleData();
+		// listAll();
 	}
 
 	public void deleteAll() {
 		System.out.println("Deleting all records..");
 		ProductRepository.deleteAll();
 		UserRepository.deleteAll();
-
 	}
 
 	public void addSampleData() {
 		System.out.println("Adding sample data");
 
-
-
 		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("johnson",
 				"doesn't matter", AuthorityUtils.createAuthorityList("ROLE_ADMIN")));
 
-		UserRepository.save(new User("peter", "peterabcd", "peter@gmail.com"));
-		UserRepository.save(new User("tony", "tonyabcd", "tony@gmail.com"));
-		UserRepository.save(new User("tom", "tomabcd", "tom@gmail.com"));
+		UserRepository.save(new User("admin", "adminabcd", "admin@gmail.com", "ROLE_ADMIN"));
+		UserRepository.save(new User("johnson", "johnsonabcd", "johnson@gmail.com", "ROLE_ADMIN"));
+		
+		UserRepository.save(new User("user", "userabcd", "userabcd@gmail.com", "ROLE_USER"));
+		UserRepository.save(new User("peter", "peterabcd", "peter@gmail.com", "ROLE_USER"));
 
 		for (int i = 1; i < 6; i++) {
 			ProductRepository.save(new Product("pasta" + i, "description" + i, (double) 100 + i + 0.9,
@@ -100,8 +96,7 @@ public class DatabaseLoader implements CommandLineRunner { // <2>
 
 	public void listAll() {
 		System.out.println("Listing sample data");
-		// ProductRepository.findAll().forEach(p -> System.out.println(p));
-		ProductRepository.findAll().forEach(p -> System.out.println(p.toString()));
+		UserRepository.findAll().forEach(p -> System.out.println(p.toString()));
 
 	}
 

@@ -15,15 +15,12 @@
  */
 package com.example.myshop.security;
 
-
-import com.example.myshop.domain.Admin;
-import com.example.myshop.domain.Product;
-import com.example.myshop.repo.AdminRepository;
-import com.example.myshop.repo.ProductRepository;
+import com.example.myshop.domain.User;
+import com.example.myshop.repo.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.User;
+// import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -34,18 +31,27 @@ import org.springframework.stereotype.Component;
 @Component
 public class SpringDataJpaUserDetailsService implements UserDetailsService {
 
-	private final AdminRepository repository;
-
 	@Autowired
-	public SpringDataJpaUserDetailsService(AdminRepository repository) {
-		this.repository = repository;
-	}
+	UserRepository UserRepository;
+
+	// @Override
+	// public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
+		
+	// 	return UserRepository;
+	// }
+
+	// private final AdminRepository repository;
+
+	// @Autowired
+	// public SpringDataJpaUserDetailsService(AdminRepository repository) {
+	// 	this.repository = repository;
+	// }
 
 	@Override
 	public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-		Admin manager = this.repository.findByName(name);
-		return new User(manager.getName(), manager.getPassword(),
-				AuthorityUtils.createAuthorityList(manager.getRoles()));
+		User User = UserRepository.findByName(name);
+		return new org.springframework.security.core.userdetails.User(User.getName(), User.getPassword(),
+				AuthorityUtils.createAuthorityList(User.getRoles()));
 	}
 
 }
