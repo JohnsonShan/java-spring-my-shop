@@ -39,7 +39,7 @@ export default class CreateDialog extends React.Component {
     let form = new FormData();
     const file = document.querySelector("#file").files[0];
     form.append("file", file);
-
+    
     this.props.postPhoto(form);
 
     window.location = "#";

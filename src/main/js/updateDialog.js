@@ -86,8 +86,7 @@ export default class UpdateDialog extends React.Component {
         {attribute == "image" ? (
           <div>
             <input
-
-              id={attribute}
+              id={`updateProduct-${this.props.product.entity._links.self.href}${attribute}`}
               type="text"
               placeholder={attribute}
               defaultValue={this.props.product.entity[attribute]}

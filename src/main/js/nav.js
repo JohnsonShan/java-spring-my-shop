@@ -23,7 +23,7 @@ export default class Nav extends React.Component {
       d.classList.remove("fade-in");
       d.classList.remove("from-top");
 
-      d.classList.remove('pointer-none');
+      d.classList.remove("pointer-none");
     } else {
       mn.classList.add("max-height-10");
       mn.style.height = "10vh";
@@ -31,7 +31,7 @@ export default class Nav extends React.Component {
       d.classList.add("fade-in");
       d.classList.add("from-top");
 
-      d.classList.add('pointer-none');
+      d.classList.add("pointer-none");
     }
   }
   render() {
@@ -74,9 +74,24 @@ export default class Nav extends React.Component {
             )}
 
             {this.props.login == "anonymousUser" ? (
-              <a className="m-2 btn btn-outline-primary" href="/login">
-                Log In
-              </a>
+              <div>
+                <button
+                  type="button"
+                  className="m-2 btn btn-outline-primary"
+                  data-toggle="modal"
+                  data-target="#loginModal"
+                >
+                  Log-in
+                </button>
+                <button
+                  type="button"
+                  className="m-2 btn btn-outline-primary"
+                  data-toggle="modal"
+                  data-target="#signupModal"
+                >
+                  Sign-up
+                </button>
+              </div>
             ) : (
               <a className="m-2 btn btn-outline-primary" href="/logout">
                 Lot out

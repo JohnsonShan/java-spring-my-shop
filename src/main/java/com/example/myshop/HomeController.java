@@ -17,6 +17,8 @@ package com.example.myshop;
 
 import com.example.myshop.storage.StorageFileNotFoundException;
 import com.example.myshop.storage.StorageService;
+import com.example.myshop.repo.UserRepository;
+import com.example.myshop.domain.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +34,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller // <1>
 public class HomeController {
 
+	@Autowired
+	UserRepository UserRepository;
+
 	private final StorageService storageService;
 
 	@Autowired
@@ -43,15 +48,35 @@ public class HomeController {
 	public String index() {
 		return "index"; // <3>
 	}
+
+	@PostMapping("/signup")
+	public String signup(@RequestParam("username") String username, @RequestParam("password") String password,
+			@RequestParam("email") String email, RedirectAttributes redirectAttributes) {
+
+		if (UserRepository.findByEmail(email) == null) {
+			UserRepository.save(new User(username, password, email));
+			redirectAttributes.addFlashAttribute("message", "You successfully sign-up !");
+
+			return "redirect:/sign_up_success";
+		} 
+		// else {
+		// 	redirectAttributes.addFlashAttribute("message", "You unsuccessfully sign-up !");
+		// 	return "redirect:/email_already_exist";
+		// }
+
+		redirectAttributes.addFlashAttribute("message", "You unsuccessfully sign-up !");
+		return "redirect:/email_already_exist";
+
+	}
 	// @RequestMapping(value="/sign-in")
 	// public String signin(){
-	// 	return "sign-in";
+	// return "sign-in";
 	// }
 	// @RequestMapping(value="/sign-up")
 	// public String signup(){
-	// 	return "sign-up";
+	// return "sign-up";
 	// }
-	
+
 	@PostMapping("/uploadPhoto")
 	public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
 

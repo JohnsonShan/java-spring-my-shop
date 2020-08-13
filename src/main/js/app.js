@@ -6,6 +6,8 @@ import Product from "./product";
 import ProductList from "./productList";
 import Nav from "./nav";
 import CartDialog from "./cartDialog";
+import LoginDialog from "./loginDialog";
+import SignupDialog from "./signupDialog";
 // import Test from './../resources/static/images/test.png';
 import { useState, useEffect } from "react";
 
@@ -145,7 +147,7 @@ class App extends React.Component {
           page: this.page,
           products: products,
           // attributes: Object.keys(this.schema.properties),
-          attributes: ["image","name","summary","price","oldPrice"],
+          attributes: ["image", "name", "summary", "price", "oldPrice"],
           pageSize: pageSize,
           links: this.links,
         });
@@ -359,7 +361,8 @@ class App extends React.Component {
           cart={this.state.cart}
           // updateCartFromCookie={this.updateCartFromCookie}
         />
-
+        <LoginDialog />
+        <SignupDialog />
         {/* <div className='mb-4'>&nbsp;</div> */}
 
         <div
