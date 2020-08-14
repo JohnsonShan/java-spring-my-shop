@@ -5,7 +5,7 @@ import com.example.myshop.domain.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-@RepositoryRestResource(collectionResourceRel = "users", path = "users")
+@RepositoryRestResource(collectionResourceRel = "users", path = "users", exported = false)
 public interface UserRepository extends MongoRepository<User, String> {
 
 	// @Override
@@ -24,5 +24,6 @@ public interface UserRepository extends MongoRepository<User, String> {
 	// User findById(Long id);
 	// User findByName(User name);
 	User findByEmail(String email);
+
 	User findByName(String name);
 }

@@ -20,13 +20,19 @@ export default class LoginDialog extends React.Component {
     const data = new FormData();
     data.append("username", this.state.username);
     data.append("password", this.state.password);
-    console.log(data);
 
     fetch("/login", {
       method: "POST",
       body: data,
-    }).then(() => {
-      location = "/";
+    }).then((p) => {
+      // console.log(p);
+      if (p.url.includes("error")) {
+        alert("Email or password wrong!");
+        // console.log(p)
+        // location = "/";
+      } else {
+        location = "/";
+      }
     });
   }
 
@@ -71,7 +77,7 @@ export default class LoginDialog extends React.Component {
                   // action="/login"
                   //   method="post"
                 >
-                  <label>Username:</label>
+                  <label>Email:</label>
                   <input
                     type="text"
                     id="username"

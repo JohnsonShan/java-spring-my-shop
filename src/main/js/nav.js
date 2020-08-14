@@ -165,9 +165,25 @@ export default class Nav extends React.Component {
               {this.props.login != "anonymousUser" ? this.props.login : "Guest"}
             </div>
             {this.props.login == "anonymousUser" ? (
-              <a className="m-2 btn btn-outline-primary" href="/login">
-                Log In
-              </a>
+              <div className='d-flex flex-column'>
+                
+                <button
+                  type="button"
+                  className="m-2 btn btn-outline-primary"
+                  data-toggle="modal"
+                  data-target="#loginModal"
+                >
+                  Log-in
+                </button>
+                <button
+                  type="button"
+                  className="m-2 btn btn-outline-primary"
+                  data-toggle="modal"
+                  data-target="#signupModal"
+                >
+                  Sign-up
+                </button>
+              </div>
             ) : (
               <a className="m-2 btn btn-outline-primary" href="/logout">
                 Lot out

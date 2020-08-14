@@ -58,6 +58,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter { // <3>
 				// .loginPage("/login")
 				.loginProcessingUrl("/login")
 				.defaultSuccessUrl("/", true)
+				
 				.permitAll()
 				.and()
 			.httpBasic()

@@ -27,7 +27,7 @@ export default class SignupDialog extends React.Component {
       return;
     }
     // let form = document.querySelector("#signupForm");
-    const data = new FormData();
+    let data = new FormData();
     data.append("username", this.state.username);
     data.append("password", this.state.password);
     data.append("email", this.state.email);
@@ -36,16 +36,20 @@ export default class SignupDialog extends React.Component {
       method: "POST",
       body: data,
     }).then((p) => {
-      if (p.url.includes("sign_up_success")) {
+      if (p.status == 201) {
         alert("Sign up success!");
+        data = new FormData();
+        data.append("username", this.state.email);
+        data.append("password", this.state.password);
         fetch("/login", {
           method: "POST",
           body: data,
-        }).then(() => {
-          alert("Login success!");
+        })
+        .then(() => {
+          // alert("Login success!");
           location = "/";
         });
-      } else if (p.url.includes("email_already_exist")) {
+      } else if (p.status == 202) {
         alert("Email already exist!");
       }
       //   location = "/";

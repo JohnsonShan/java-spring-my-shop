@@ -49,33 +49,33 @@ public class HomeController {
 		return "index"; // <3>
 	}
 
+	// @PostMapping("/signup")
+	// public String signup(@RequestParam("username") String username,
+	// @RequestParam("password") String password,
+	// @RequestParam("email") String email, RedirectAttributes redirectAttributes) {
+
+	// if (UserRepository.findByEmail(email) == null) {
+	// UserRepository.save(new User(username, password, email));
+
+	// return "redirect:/?sign_up_success";
+	// } else {
+
+	// return "redirect:/?email_already_exist";
+	// }
+	// }
+
 	@PostMapping("/signup")
-	public String signup(@RequestParam("username") String username, @RequestParam("password") String password,
-			@RequestParam("email") String email, RedirectAttributes redirectAttributes) {
+	public ResponseEntity<String> signup(@RequestParam("username") String username,
+			@RequestParam("password") String password, @RequestParam("email") String email,
+			RedirectAttributes redirectAttributes) {
 
 		if (UserRepository.findByEmail(email) == null) {
 			UserRepository.save(new User(username, password, email));
-			redirectAttributes.addFlashAttribute("message", "You successfully sign-up !");
-
-			return "redirect:/sign_up_success";
-		} 
-		// else {
-		// 	redirectAttributes.addFlashAttribute("message", "You unsuccessfully sign-up !");
-		// 	return "redirect:/email_already_exist";
-		// }
-
-		redirectAttributes.addFlashAttribute("message", "You unsuccessfully sign-up !");
-		return "redirect:/email_already_exist";
-
+			return ResponseEntity.status(201).body("You unsuccessfully sign-up !");
+		} else {
+			return ResponseEntity.status(202).body("Email already exist!");
+		}
 	}
-	// @RequestMapping(value="/sign-in")
-	// public String signin(){
-	// return "sign-in";
-	// }
-	// @RequestMapping(value="/sign-up")
-	// public String signup(){
-	// return "sign-up";
-	// }
 
 	@PostMapping("/uploadPhoto")
 	public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
